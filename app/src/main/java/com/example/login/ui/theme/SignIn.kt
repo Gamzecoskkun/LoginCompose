@@ -25,10 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.example.login.R
+import com.example.login.navigation.Screens
 
 @Composable
-fun signIn() {
+fun signIn(
+    navController: NavController
+) {
 
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
@@ -37,18 +43,17 @@ fun signIn() {
             .fillMaxSize()
             .background(Color.White)
             .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(100.dp))
         Text(
             text = "Lets Sign You in", style = Typography.titleLarge, fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Welcome Back,\nYou have been missed",
             style = Typography.titleLarge,
             fontWeight = FontWeight.Medium
         )
-        Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = email.value,
@@ -61,7 +66,6 @@ fun signIn() {
                 password.value = it
             },
             label = { Text("Password") })
-        Spacer(modifier = Modifier.height(8.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -72,16 +76,14 @@ fun signIn() {
                 text = "Forgot Password ?", fontWeight = FontWeight.Bold
             )
         }
-        Spacer(modifier = Modifier.height(32.dp))
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                println("Şu and bu butona tıklandı")
+                navController.navigate(Screens.SignUpScreen)
             },
         ) {
             Text("Sign In")
         }
-        Spacer(modifier = Modifier.height(16.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -92,7 +94,7 @@ fun signIn() {
                     .padding(start = 8.dp)
             )
             Text(
-                text = "or", fontWeight = FontWeight.Bold
+                text ="or", fontWeight = FontWeight.Bold
             )
             HorizontalDivider(
                 Modifier
@@ -100,7 +102,6 @@ fun signIn() {
                     .padding(start = 8.dp)
             )
         }
-        Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
@@ -138,5 +139,5 @@ fun signIn() {
 @Composable
 @Preview
 fun signInPreview() {
-    signIn()
+    signIn(navController= rememberNavController())
 }

@@ -20,9 +20,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun signUp() {
+fun signUp(
+    navController: NavController,
+) {
     val name = remember { mutableStateOf("") }
     val businnesName = remember { mutableStateOf("") }
     val phone = remember { mutableStateOf("") }
@@ -33,7 +37,8 @@ fun signUp() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Spacer(modifier = Modifier.height(64.dp))
         Text(
@@ -41,55 +46,47 @@ fun signUp() {
             style = Typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Hello user , you have \na greatful journey ",
             style = Typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = name.value,
             onValueChange = { name.value = it },
             label = { Text("Name") }
         )
-        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = businnesName.value,
             onValueChange = { businnesName.value = it },
             label = { Text("Buissness Name") }
         )
-        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = phone.value,
             onValueChange = { phone.value = it },
             label = { Text("Phone") }
         )
-        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = email.value,
             onValueChange = { email.value = it },
             label = { Text("Email") }
         )
-        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password.value,
             onValueChange = { password.value = it },
             label = { Text("Password") }
         )
-        Spacer(modifier = Modifier.height(32.dp))
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {}
         ) {
             Text(text = "Sign Up")
         }
-        Spacer(modifier = Modifier.height(32.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
@@ -103,5 +100,5 @@ fun signUp() {
 @Preview
 @Composable
 fun signUpPreview() {
-    signUp()
+    signUp(navController = rememberNavController())
 }
